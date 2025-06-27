@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+
+<!-- Banner -->
+<section id="banner">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="banner-search">
+                  <h1>寻找你的定制旅程！</h1>
+                  <p>每一个人  ， 一生当中都需要一场说走就走的旅行！</p>
+               <form action="" method="post" name="reg_form">
+                       {% csrf_token %}
+                  <div class="advance-search">
+                      <div class="dir-search">
+                          <div class="single-query form-group">
+                              <input name='searchinfo' type="text" class="keyword-input" placeholder="发现 景点/美食/酒店" />
+                          </div>
+                      </div>
+                      <div class="search-btn">
+                          <button type="submit">查询 <i class="fa fa-search" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                  </div>
+                 </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Banner -->
+
+    <!-- Directory Category -->
+    <section id="directory-category" class="p_b70 p_t70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 directory-category-heading">
+                    <h2>我们拥有的 <span>信息</span></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="directory-category-slider" class="owl-carousel owl-theme">
+                       <div class="item">
+                            <div class="directory-category-box text-center resturent"> <span><i class="fa fa-glass" aria-hidden="true"></i></span>
+                                <a href={% url 'jdhtml' %}>
+                                    <h3>景点</h3>
+                                </a>
+                                <p>{{ cdk.jd }}</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="directory-category-box text-center real-estate"> <span><i class="fa fa-home" aria-hidden="true"></i></span>
+                                <a href=''>
+                                    <h3>美食</h3>
+                                </a>
+                                <p>{{ cdk.food }}</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="directory-category-box text-center sport"> <span><i class="fa fa-futbol-o" aria-hidden="true"></i></span>
+                                <a href=''>
+                                    <h3>酒店</h3>
+                                </a>
+                                <p>{{ cdk.hotle }}</p>
+                            </div>
+                        </div>
+
+                  
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Directory Category -->
+
+    <!-- Popular Listing -->
+    <section id="popular-listing" class="p_t70 over-hide-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading">
+                    <h2>根据您的个人喜好 <span>为您推荐如下景点：</span></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="profile">
+                            <div class="row">
+                                 {% for yy in indexinfo %}
+                                     <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="popular-listing-box">
+                                        <div class="popular-listing-img">
+                                            <figure class="effect-ming"> <img src={{ yy.img1 }} alt="image">
+                                                <figcaption>
+                                                    <ul>
+                                                        <li><a href="#!"><i class="fa fa-heart" aria-hidden="true"></i></a> </li>
+                                                        <li><a href="#!"><i class="fa fa-map-marker" aria-hidden="true"></i></a> </li>
+                                                        <li><a href="#!"><i class="fa fa-reply" aria-hidden="true"></i></a> </li>
+                                                    </ul>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                        <div class="popular-listing-detail">
+                                            <h3><a href="jdDetails/{{ yy.id }}">{{ yy.jiname }}</a></h3>
+{#                                            <p>{{ yy.intr }}</p>#}
+                                        </div>
+                                        <div class="popular-listing-add"> <span><i class="fa fa-map-marker" aria-hidden="true"></i>{{ yy.jwhere }}</span></div>
+                                    </div>
+                                </div>
+
+
+
+
+                            {% endfor %}
+
+
+
+
+
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- Popular Listing -->
+
+    <!-- Most visited places -->
+    <section id="post-visited-places">
+
+        <div class="container over-hide">
+
+            <div class="row">
+                <div class="col-md-12 heading text-center">
+                    <h2>更多<span>美食</span>推荐</h2>
+                    <p>在线旅游系统美食推荐</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="places-slider" class="owl-carousel owl-theme">
+
+                     {% for fdk in foodinfo %}
+                              <div class="item">
+                        <div class="popular-listing-box">
+                            <div class="popular-listing-img">
+                                <figure class="effect-ming"> <img src={{ fdk.img }} alt="image">
+                                    <figcaption>
+                                        <ul>
+                                            <li><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                                            </li>
+                                        </ul>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <div class="popular-listing-detail">
+                                <h3><a href="listing-details.html">{{fdk.fname }}</a></h3>
+                                <p>{{ fdk.intr }}</p>
+                            </div>
+
+                            <ul class="place-listing-add">
+                                <li>(31 reviews) </li>
+                                <li><img src="static/images/stars.png" alt="image">
+                                </li>
+                                <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                     {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center discover">
+                    <h2>来一次说走就走的旅行，马上开启定制旅行！</h2>
+                    <a href={% url 'index' %}>立刻定制</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Most visited places -->
+
+
+
+    <!-- Latest News -->
+    <section id="our-blog" class="p_t70 p_b70">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-md-12 heading">
+                            <h2><span>热门评论</span></h2>
+                        </div>
+                    </div>
+
+                    <div id="latest_news-slider" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="latest_box">
+                                <h3>Take me out of country</h3>
+                                <p>Aliquam ultrices venenatis mauris. Vestibulum ante ipsum primis in faucibus...</p>
+                                <div class="lates_border m-b-25"></div>
+                                <img src="images/latest_news.png" alt="image">
+                                <span>by Margaret R. Rose</span>
+                                <span><i class="fa fa-calculator" aria-hidden="true"></i>01 Oct 2017</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-md-12 heading">
+                            <h2>Keep up  <span>to date</span></h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="updates">
+                                <div class="over_image"><img src="images/update_bg.png" alt="image" />
+                                </div>
+
+                                <p class="p_b20">Subscribe to our newsletters to receive latest news and updates. </p>
+                                <form class="p-t-25">
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Name">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="email" class="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="submit" class="submit" value="">
+                                        <span><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Latest News -->
+
+    <!-- User -->
+    <section id="our-user" class="p_t70 p_b70">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 heading">
+                            <h2>热门<span>酒店</span> 预定</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12 user-btn">
+                    <a href="login-registerd.html">Join Now</a>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div id="ri-grid" class="ri-grid ri-grid-size-1 ri-shadow">
+<ul>
+                             {% for hdk in hotleinfo %}
+
+                                 <li>
+                                  <img src={{ hdk.img }} alt="image">
+
+                                 </li>
+
+
+
+                             {% endfor %}
+   </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Useer -->
+
+    <!-- Footer -->
+    
+   
+    <!-- Popups -->
+
+    <script src="static/js/jquery.2.2.3.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/jquery.appear.js"></script>
+    <script src="static/js/jquery-countTo.js"></script>
+    <script src="static/js/owl.carousel.min.js"></script>
+    <script src="static/js/jquery.fancybox.min.js"></script>
+    <script src="static/js/bootsnav.js"></script>
+    <script src="static/js/zelect.js"></script>
+    <script src="static/js/parallax.min.js"></script>
+    <script src="static/js/modernizr.custom.26633.js"></script>
+    <script src="static/js/jquery.gridrotator.js"></script>
+    <script src="static/js/functions.js"></script>
+
+
+{% endblock %}

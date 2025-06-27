@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}行程定制{% endblock %}
+{% block content %}
+
+<!-- HEADER  -->
+        <div class="dingzhi_left">
+            <div class="d_left_1">
+<!-- <iframe> 标签规定一个内联框架。一个内联框架被用来在当前 HTML 文档中嵌入另一个文档-->
+                <iframe src="" name="send" id="send" style="display:none;"></iframe>
+<!-- <form> 元素表示文档中的一个区域，此区域包含交互控件，用于向 Web 服务器提交信息。-->
+                <form action="" method="post" name="reg_form">
+                    {% csrf_token %}
+                    <div class="d_left_1t">定制行程：</div>
+                    <div class="d_left_1d">
+
+                        <div class="d_left_1d_1">
+                            <label class="w120">目的地：</label>
+<!--                            <input> 元素用于为基于 Web 的表单创建交互式控件，以便接受来自用户的数据。-->
+                            <input type="hidden" value="0" id="areaid_1" name="post_fields[mdd]">
+<!--                            <span> 用于对文档中的行内元素进行组合。-->
+                            <span id="load_area_1">
+<!--                            <select> 元素表示一个提供选项菜单的控件-->
+                                <select class="dq3" name="city" id="mz">
+                                    <option value="0">请选择</option>
+                                    <option value="beijing">北京</option>
+                                    <option value="shanghai">上海</option>
+                                    <option value="hangzhou">杭州</option>
+                                    <option value="changsha">长沙</option>
+                                    <option value="guangzhou">广州</option>
+                                    <option value="shenzhen">深圳</option>
+                                    <option value="sanya">三亚</option>
+                                    <option value="xian">西安</option>
+                                    <option value="guilin">桂林</option>
+                                </select>
+                            </span>
+                            <label style="font-size:12px;color:#ccc;">#当前仅提供热门旅游城市</label>
+                        </div>
+
+                        <div class="d_left_1d_3">
+                            <label class="w120">起始地域：</label>
+<!--                            <script> 元素用于嵌入可执行代码或数据，这通常用作嵌入或者引用 JavaScript 代码。-->
+                            <script src="http://huakailvyou.com/file/script/area.js" type="text/javascript"></script>
+                            <input type="hidden" value="0" id="areaid_2" name="post_fields[cfcs]">
+                            <span id="load_area_2">
+                                <select class="dq3" onchange="load_area(this.value, 2);" id="ac">
+                                    <option value="0">请选择</option>
+                                    <option value="1">北京</option>
+                                    <option value="2">上海</option>
+                                    <option value="3">天津</option>
+                                    <option value="4">重庆</option>
+                                    <option value="5">河北</option>
+                                    <option value="6">山西</option>
+                                    <option value="7">内蒙古</option>
+                                    <option value="8">辽宁</option>
+                                    <option value="9">吉林</option>
+                                    <option value="10">黑龙江</option>
+                                    <option value="11">江苏</option>
+                                    <option value="12">浙江</option>
+                                    <option value="13">安徽</option>
+                                    <option value="14">福建</option>
+                                    <option value="15">江西</option>
+                                    <option value="16">山东</option>
+                                    <option value="17">河南</option>
+                                    <option value="18">湖北</option>
+                                    <option value="19">湖南</option>
+                                    <option value="20">广东</option>
+                                    <option value="21">广西</option>
+                                    <option value="22">海南</option>
+                                    <option value="23">四川</option>
+                                    <option value="24">贵州</option>
+                                    <option value="25">云南</option>
+                                    <option value="26">西藏</option>
+                                    <option value="27">陕西</option>
+                                    <option value="28">甘肃</option>
+                                    <option value="29">青海</option>
+                                    <option value="30">宁夏</option>
+                                    <option value="31">新疆</option>
+                                    <option value="32">台湾</option>
+                                    <option value="33">香港</option>
+                                    <option value="34">澳门</option>
+                                </select>
+                            </span>
+                            <script type="text/javascript">
+                            area_title[2] = '请选择';
+                            area_extend[2] = '';
+                            area_areaid[2] = '0';
+                            area_deep[2] = '0';
+                            </script>
+                            <span id="dmdd" class="f_red"></span>
+                        </div>
+
+                        <div class="d_left_1d_4">
+                            <!-- 弹出日历 -->
+                            <label class="w120">游玩天数：</label>
+                             <select id="days" name="post_fields">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                 <option value="5">6</option>
+                                 <option value="5">7</option>
+                            </select>
+                        </div>
+
+                        <div class="d_left_1d_6">
+                            <label class="w120">旅游总共预算：</label>
+                            <select id="lyys" name="post_fields[lyys]">
+                                <option value="1000">1000以内</option>
+                                <option value="2000">2000以内</option>
+                                <option value="3000">3000以内</option>
+                                <option value="4000">4000以内</option>
+                                <option value="5000">5000以内</option>
+                            </select>
+                        </div>
+
+                        <div class="d_left_1d_7" id="d_left_1d_7">
+                        <class class="w120">出游人群：</class>
+                             <!-- 字宽占据符&nbsp; 不会累加的（只算1个），且该空格占据宽度受【字体】影响明显而强烈 -->
+                        <span id="lxz">
+                            <input type="radio" id="lxz" value="公司组织" name="post_fields[lyxz]">亲子出游&nbsp;&nbsp;&nbsp;
+                            <img class="lxz_input1" src="../static/images/lxz_background1.png" onclick="">
+                            <input type="radio" id="lxz" value="私人组织" name="post_fields[lyxz]">蜜月旅行&nbsp;&nbsp;&nbsp;
+                            <img class="lxz_input1" src="../static/images/lxz_background2.png" onclick="">
+                            <input type="radio" id="lxz" value="家庭出游" name="post_fields[lyxz]">家庭出行&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img class="lxz_input1" src="../static/images/lxz_background4.png" onclick="">
+                            <input type="radio" id="lxz" value="同学聚会" name="post_fields[lyxz]">单人旅行&nbsp;&nbsp;&nbsp;
+                            <img class="lxz_input1" src="../static/images/lxz_background5.png" onclick="">
+                            <input type="radio" id="lxz" value="自由行" name="post_fields[lyxz]">朋友旅行&nbsp;&nbsp;&nbsp;
+                            <img class="lxz_input1" src="../static/images/lxz_background3.png" onclick="">
+                        </span>
+
+                        <!-- 以下代码起格式作用，并没有显示 -->
+                        <div class="d_left_1d_8 Prop_company_pr" style="display:none;" id="commc">
+                            <label class="w120">公司名称：</label>
+                            <input type="text" size="30" value="" id="gsmc" name="post_fields[gsmc]">
+                        </div>
+                    </div>
+            </div>
+
+            <div class="d_left_2">
+                <div class="d_left_2t">定制详情：</div>
+                <div class="d_left_2d">
+
+                    <div class="d_left_2d_1">
+                        <label class="w120">住宿偏好：</label>
+                        <label>种类</label>
+                        <select id="jdxj" name="post_fields[jdxj]">
+                            <option value="无需">无需</option>
+                            <option value="五星级/豪华">青年旅社</option>
+                            <option value="四星级/高档">名宿</option>
+                            <option value="三星级/舒适">星级酒店</option>
+                        </select>
+                        <label>价格</label>
+                        <select id="jdlc" name="post_fields[jdlc]">
+                            <option value="100">100以内</option>
+                            <option value="200">100-200以内</option>
+                            <option value="400">200-400以内</option>
+                            <option value="500">400以上</option>
+                        </select>
+                    </div>
+
+<!--                   <div class="d_left_2d_7">-->
+<!--                        <span class="w90">酒店距离：</span>-->
+<!--                        <span id="fxd">-->
+<!--                            <input type="checkbox" id="fxd" value="离市中心近" name="post_fields[fxd][]"> 离市中心近-->
+<!--                            <input type="checkbox" id="fxd" value="景点附近入住" name="post_fields[fxd][]"> 景点附近入住-->
+<!--                            <input type="checkbox" id="fxd" value="含购物中心" name="post_fields[fxd][]"> 含购物中心-->
+<!--                            <input type="checkbox" id="fxd" value="智能推荐" name="post_fields[fxd][]"> 智能推荐-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="d_left_2d_1_2">-->
+<!--                        <label>舒适</label>-->
+<!--                        <select id="fxb" name="post_fields[fxb]">-->
+<!--                            <option value="0">安静</option>-->
+<!--                            <option value="1">干净</option>-->
+<!--                            <option value="2">2</option>-->
+<!--                            <option value="3">3</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    -->
+<!--                    <div class="d_left_2d_3">-->
+<!--                        <label class="w120">房型个性要求：</label>-->
+<!--                        <textarea rows="3" id="fxdz" name="post_fields[fxdz]"></textarea>-->
+<!--                    </div>-->
+
+                    <div class="d_left_2d_6">
+                        <span class="w90">出行喜好：</span>
+                        <span id="jdz">
+                            <input type="checkbox" id="jdz" value="现代风情" name="post_fields[jqdz][]"> 现代风情
+                            <input type="checkbox" id="jdz" value="历史风情" name="post_fields[jqdz][]"> 历史风情
+                            <input type="checkbox" id="jdz" value="当地特色" name="post_fields[jqdz][]"> 当地特色
+                            <input type="checkbox" id="jdz" value="博物馆" name="post_fields[jqdz][]"> &nbsp&nbsp&nbsp&nbsp博物馆<br/>
+                            <input type="checkbox" id="jdz" value="当地动物园" name="post_fields[jqdz][]"> &nbsp&nbsp&nbsp&nbsp动物园
+                            <input type="checkbox" id="jdz" value="游乐中心" name="post_fields[jqdz][]"> 游乐中心
+                            <input type="checkbox" id="jdz" value="历史伟人" name="post_fields[jqdz][]"> 历史伟人
+                            <input type="checkbox" id="jdz" value="当地公园" name="post_fields[jqdz][]"> 当地公园<br/>
+                            <input type="checkbox" id="jdz" value="植物园" name="post_fields[jqdz][]"> &nbsp&nbsp&nbsp&nbsp植物园
+                            <input type="checkbox" id="jdz" value="国内名校" name="post_fields[jqdz][]"> 国内名校
+                            <input type="checkbox" id="jdz" value="购物中心" name="post_fields[jqdz][]"> 购物中心
+                            <input type="checkbox" id="jdz" value="当地剧院" name="post_fields[jqdz][]"> 当地剧院<br/>
+                            <input type="checkbox" id="jdz" value="当地古镇" name="post_fields[jqdz][]"> 当地古镇
+                            <input type="checkbox" id="jdz" value="红色文化" name="post_fields[jqdz][]"> 红色文化
+                            <input type="checkbox" id="jdz" value="体育公园" name="post_fields[jqdz][]"> 体育公园
+                            <input type="checkbox" id="jdz" value="宗教圣地" name="post_fields[jqdz][]"> 宗教圣地
+                        </span>
+                    </div>
+
+                    <div class="d_left_2d_7" id="d_left_2d_7">
+                        <span class="w90">游玩方式：</span>
+                        <span id="ycyq">
+                            <input type="radio" id="0" value="精品游玩" name="post_fields[ycyq]"> 精品游玩
+                            <input type="radio" id="1" value="快速游玩" name="post_fields[ycyq]"> 快速游玩
+                        </span>
+                    </div>
+
+<!--                    <div class="d_left_2d_7" id="d_left_2d_7">-->
+<!---->
+<!--                        <span class="w90">景点门票：</span>-->
+<!--                        <span id="ycyq4">-->
+<!--                            <input type="radio" id="ycyq_0" value="不去要门票的景点" name="post_fields[ycyq4]"> 不去要门票的景点-->
+<!--                            <input type="radio" id="ycyq_0" value="智能推荐" name="post_fields[ycyq4]"> 智能推荐-->
+<!--                            <input type="radio" id="ycyq_1" value="所有景点都去" name="post_fields[ycyq4]"> 所有景点都去-->
+<!--                        </span>-->
+<!--                    </div>-->
+
+                    <div class="d_left_2d_7" id="d_left_2d_7">
+                        <span class="w90">食品推荐：</span>
+                        <span id="ycyq1">
+                            <input type="radio" id="ycyq1_0" value="推荐特色菜" name="post_fields[ycyq1]"> 推荐特色菜
+                            <input type="radio" id="ycyq1_1" value="不推荐特色菜" name="post_fields[ycyq1]"> 不推荐特色菜
+                        </span>
+                    </div>
+
+<!--{#                    <div class="d_left_2d_7" id="d_left_2d_7">#}-->
+<!--{##}-->
+<!--{#                        <span class="w90">口味要求：</span>#}-->
+<!--{#                        <span id="ycyq2">#}-->
+<!--{#                            <input type="radio" id="ycyq2_0" value="清淡" name="post_fields[ycyq2]"> 清淡#}-->
+<!--{#                            <input type="radio" id="ycyq2_1" value="微辣" name="post_fields[ycyq2]"> 微辣#}-->
+<!--{#                            <input type="radio" id="ycyq2_1" value="超辣" name="post_fields[ycyq2]"> 超辣#}-->
+<!--{#                        </span>#}-->
+<!--{#                    </div>#}-->
+<!--                    {#                    <div class="d_left_2d_8">#}-->
+<!--                    {##}-->
+<!--                    {#                        <label class="w120">用餐个性要求：</label>#}-->
+<!--                    {#                        <textarea rows="3" id="ycdz" name="post_fields[ycdz]"></textarea>#}-->
+<!--                    {#                    </div>#}-->
+<!--{#                    <div class="d_left_2d_9" id="d_left_2d_9">#}-->
+<!--{##}-->
+<!--{#                        <span class="w90">预订票务：</span>#}-->
+<!--{#                        <span id="ydpw"><input type="radio" id="ydpw" value="是" name="post_fields[ydpw]"> 是<input#}-->
+<!--{#                                type="radio" id="ydpw" value="否" name="post_fields[ydpw]"> 否</span>#}-->
+<!--{#                    </div>#}-->
+
+                    <div class="d_left_2d_10" id="d_left_2d_10">
+                        <span class="w90">交通方式：</span>
+                        <span id="jcyq">
+                            <input type="radio" id="jcyq" value="经济舱" name="post_fields[jcyq]"> 经济舱
+                            <input type="radio" id="jcyq" value="高铁" name="post_fields[jcyq]"> 高铁
+                            <input type="radio" id="jcyq" value="火车" name="post_fields[jcyq]"> 火车
+                            <input type="radio" id="jcyq" value="特价机票" name="post_fields[jcyq]"> 特价机票
+                        </span>
+                    </div>
+
+
+                    <div class="d_left_2d_12" id="d_left_2d_12">
+                        <span class="w90">出行方式：</span>
+                        <span id="cxfs">
+                            <input type="radio" id="cxfs" value="专车专导" name="post_fields[cxfs]"> 专车专导
+                            <input type="radio" id="cxfs" value="自由行" name="post_fields[cxfs]"> 自由行
+                            <input type="radio" id="cxfs" value="自驾游" name="post_fields[cxfs]"> 自驾游
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+<!--{#            <div class="duli_d_left_3">#}-->
+<!--{#                <div class="duli_d_left_3t">个性要求：</div>#}-->
+<!--{#                <textarea rows="3" class="duli_d_left_3d" name="post[content]" placeholder="请输入个性要求"#}-->
+<!--{#                          id="content"></textarea>#}-->
+<!--{#            </div>#}-->
+
+            <div class="d_left_5">
+                <input id="submit" type="submit" name="submit" value="提交需求"/>
+                <input id="reset" type="reset" value="需求重填"/>
+            </div>
+        </form>
+</div>
+
+<script type="text/javascript" src="http://www.huakailvyou.com/file/script/clear.js"></script>
+<script type="text/javascript">
+    //当元素的值发生改变时，会发生 change 事件。该事件仅适用于文本域（text field），以及 textarea 和 select 元素。
+    //change() 函数触发 change 事件，或规定当发生 change 事件时运行的函数。
+    //注释：当用于 select 元素时，change 事件会在选择某个选项时发生。当用于 text field 或 text area 时，该事件会在元素失去焦点时发生。
+    // 为select元素load_area_1添加事件，当选择其中一项触发
+    $("#load_area_1").change(function () {
+        var w;
+        var q;
+        var z;
+        var c;
+        // 获取select选择的text
+        w = $("#mz").find("option:selected").text();
+        q = $("#mzz").find("option:selected").text();
+        z = w + '　' + q;
+        // 获取mdd块中的html元素置为z
+        $("#mdd").html(z);
+        // 获取select选择的val
+        c = $("#mz").find("option:selected").val();
+        // 控制是否展示d_left_2d_11元素块
+        if (c == "393") {
+            $("#d_left_2d_11").show();
+        } else {
+            $("#d_left_2d_11").hide();
+        }
+    });
+
+    $("#cr").change(function () {
+        var a;
+        a = $("#cr").val();
+        $("#crs").html(a);
+    });
+    $("#et").change(function () {
+        var b;
+        b = $("#et").val();
+        $("#ets").html(b);
+    });
+    $("#lr").change(function () {
+        var b;
+        b = $("#lr").val();
+        $("#lrs").html(b);
+    });
+     $("#days").change(function () {
+        var b;
+        b = $("#days").val();
+        $("#cf").html(b);
+    });
+
+    $("#load_area_2").change(function () {
+        var w;
+        var q;
+        var z;
+        w = $("#ac").find("option:selected").text();
+        q = $("#acc").find("option:selected").text();
+        z = w + '　' + q;
+        $("#cfcs").html(z);
+    });
+
+
+    $("#lyys").change(function () {
+        var b;
+        b = $("#lyys").val();
+        $("#ys").html(b);
+        cffc();
+    });
+
+
+    $("#gsmc").change(function () {
+        var b;
+        b = $("#gsmc").val();
+        $("#com").html(b);
+        cffc();
+    });
+
+    $("#jdxj").change(function () {
+        var w;
+        w = $("#jdxj").find("option:selected").text();
+        $("#jdyq").html(w);
+        cffc();
+    });
+    $("#jdlc").change(function () {
+        var x;
+        x = $("#jdlc").find("option:selected").text();
+        $("#jdl").html(x);
+        cffc();
+    });
+    $("#fxd").change(function () {
+        fanjian();
+        cffc();
+    });
+    $("#fxb").change(function () {
+        fanjian();
+        cffc();
+    });
+    $("#fxdz").change(function () {
+        var a;
+        a = $("#fxdz").val();
+        $("#fxgx").html(a);
+    });
+
+    $("#dyyz").change(function () {
+        dyy();
+        cffc();
+    });
+
+    $("#dyxb").change(function () {
+        dyy();
+        cffc();
+    });
+
+    $("#dydz").change(function () {
+        var a;
+        a = $("#dydz").val();
+        $("#dygx").html(a);
+    });
+
+    $("#jdz").change(function () {
+
+        var obj = document.getElementsByName('post_fields[jqdz][]'); //选择所有name="'test'"的对象，返回数组
+//取到对象数组后，我们来循环检测它是不是被选中
+        var s = '';
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].checked) s += obj[i].value + ','; //如果选中，将value添加到变量s中
+        }
+//那么现在来检测s的值就知道选中的复选框的值了
+        $("#jq").html(s);
+    });
+
+    $("#fxdz").change(function () {
+        var a;
+        a = $("#fxdz").val();
+        $("#fxgx").html(a);
+    });
+
+    $("#ycyq").change(function () {
+        var w;
+        w = $('input[name="post_fields[ycyq]"]:checked').val();
+        $("#hong1").html(w);
+    });
+
+    $("#ycyq4").change(function () {
+        var w;
+        w = $('input[name="post_fields[ycyq4]"]:checked').val();
+        $("#hong2").html(w);
+    });
+
+    $("#ycyq1").change(function () {
+        var w;
+        w = $('input[name="post_fields[ycyq1]"]:checked').val();
+        $("#hong3").html(w);
+    });
+    $("#ycyq2").change(function () {
+        var w;
+        w = $('input[name="post_fields[ycyq2]"]:checked').val();
+        $("#hong4").html(w);
+    });
+
+    $("#ycdz").change(function () {
+        var a;
+        a = $("#ycdz").val();
+        $("#ycgx").html(a);
+    });
+
+    $("#ydpw").change(function () {
+        var w;
+        w = $('input[name="post_fields[ydpw]"]:checked').val();
+        $("#pw").html(w);
+    });
+    $("#jcyq").change(function () {
+        var w;
+        w = $('input[name="post_fields[jcyq]"]:checked').val();
+        $("#jp").html(w);
+    });
+    $("#hc").change(function () {
+        var w;
+        w = $('input[name="post_fields[hc]"]:checked').val();
+        $("#hcp").html(w);
+    });
+
+
+    $("#cxfs").change(function () {
+        var w;
+        var cf;
+        w = $('input[name="post_fields[cxfs]"]:checked').val();
+        $("#cx").html(w);
+        cffc();
+    });
+
+    $("#content").change(function () {
+        var w;
+        w = $("#content").val();
+        $("#gx").html(w);
+        cffc();
+    });
+
+    function cffc() {
+        var cf;
+        var fc;
+        cf = $("#post_fieldscfrq").val();
+        fc = $("#post_fieldsfcrq").val();
+        $("#cf").html(cf);
+        $("#fc").html(fc);
+    }
+
+    function dyy() {
+        var w;
+        var x;
+        var z;
+        w = $("#dyyz").find("option:selected").text();
+        w = '语种　' + w;
+        x = $("#dyxb").find("option:selected").text();
+        x = '性别　' + x;
+        z = w + '　' + x;
+        $("#dy").html(z);
+    }
+
+    function fanjian() {
+        var obj = document.getElementsByName('post_fields[fxd][]'); //选择所有name="'test'"的对象，返回数组
+//取到对象数组后，我们来循环检测它是不是被选中
+        var s = '';
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].checked) s += obj[i].value + ','; //如果选中，将value添加到变量s中
+        }
+//那么现在来检测s的值就知道选中的复选框的值了
+        $("#fx").html(s);
+    }
+
+    var destoon_oauth = '0';
+</script>
+{% endblock %}

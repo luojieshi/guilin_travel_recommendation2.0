@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}{{ biginfo.city }}{% endblock %}
+{% block content %}
+
+<div>
+    <!--    网页切换块-->
+        <div class="detail-journey-tab">
+            <ul class="J_Journey4RouteTab">
+                <li class="active">线路1<i class="icon"></i></li>
+                <li>线路2<i class="icon"></i></li>
+            </ul>
+        </div>
+    <!--    网页切换块-->
+
+
+<!--        第一推荐结果块-->
+    <div class="contain">
+            <div class="item">
+                <div class="section-box-content detail-route4-brief-box detail-route4-brief-nomap">
+
+
+                    <!--                    推荐线路1介绍块-->
+                    <div class="J_DetailRouteBrief detail-route-brief" style="width: 400px;height: 400px">
+                        <div class="J_DetailRouteBriefBox detail-route-brief-box">
+                            <div class="J_DetailRouteBriefInner detail-route-brief-inner">
+                                <h4>推荐线路1：</h4>
+                                <div class="section-box-content">
+                                    <div class="detail-feature-brief">
+                                        <div class="detail-feature-brief-unit">
+                                            <span>出行城市：</span>
+                                            {% if biginfo.city == "shanghai" %}
+                                                <strong style="font-weight:bold; font-size:15px;">上海</strong>
+                                            {% endif %}
+                                            {% if biginfo.city == "changsha" %}
+                                                <strong style="font-weight:bold; font-size:15px;">长沙</strong>
+                                            {% endif %}
+                                            {% if biginfo.city == "chongqing" %}
+                                                <strong style="font-weight:bold; font-size:15px;">重庆</strong>
+                                            {% endif %}
+                                            {% if biginfo.city == "zigong" %}
+                                                <strong style="font-weight:bold; font-size:15px;">自贡</strong>
+                                            {% endif %}
+                                            {% if biginfo.city == "panzhihua" %}
+                                                <strong style="font-weight:bold; font-size:15px;">攀枝花</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "chengdu" %}
+                                                <strong style="font-weight:bold; font-size:15px;">成都</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "abazhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">阿坝藏族羌族自治州</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "leshan" %}
+                                                <strong style="font-weight:bold; font-size:15px;">乐山</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "dujiangyan" %}
+                                                <strong style="font-weight:bold; font-size:15px;">都江堰</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "guangzhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">广州</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "shenzhen" %}
+                                                <strong style="font-weight:bold; font-size:15px;">深圳</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "sanya" %}
+                                                <strong style="font-weight:bold; font-size:15px;">三亚</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "guilin" %}
+                                                <strong style="font-weight:bold; font-size:15px;">桂林</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "hangzhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">杭州</strong>
+                                            {% endif %}
+                                            {% if  biginfo.city == "beijing" %}
+                                                <strong style="font-weight:bold; font-size:15px;">北京</strong>
+                                            {% endif %}
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">访问景点：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo.num_jd }} 个
+                                                {% for tx in hs %}
+                                                    {% if tx.id|add:1 >= forloop.counter %}
+                                                        ，{{ tx.jiname }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">餐饮推荐：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo.num_food }} 种特色菜
+                                                {% for tx in fos %}
+                                                    {% if tx.id|add:1 >= forloop.counter %}
+                                                        ，{{ tx.name }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">住宿推荐：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo.num_hotle }} 晚酒店
+                                                {% for tx in hos %}
+                                                    {% if tx.id == 1 %}
+                                                        ，{{ tx.name }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>游玩天数：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo.play_day }}天</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>出行方式：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo.trfic}}</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>预计费用：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo.price }}￥</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>推荐理由：</span>
+                                            <strong style="color: red; font-weight: bold; font-size:15px;">
+                                                {{ resontence }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    推荐线路1介绍块-->
+
+
+                    <!--                    地图展示块-->
+                   <div class="J_DetailRouteBrief detail-route-brief">
+                        <div class="J_DetailRouteBriefBox detail-route-brief-box">
+                            <div class="J_DetailRouteBriefInner detail-route-brief-inner"
+                                 style="width: 1000px;height: 500px">
+                                    <style type="text/css">
+                                        #allmap {
+                                                height: 100%;
+                                                width: 100%;
+                                            }
+                                    </style>
+                                    <script  src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=vUTGxAEy9MPNy7QziuYAINOotwKYnxpU"></script>
+                                    <div id="allmap" ></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    地图展示块-->
+
+
+                    <!--                    线路酒店美食信息块-->
+                    <div class="J_DetailJourney detail-journey detail-journey-4" >
+
+
+                        <!--                    中间空行块-->
+                        <div class="detail-journey-dot"></div>
+                        <div class="J_JourneyNav detail-journey-4-nav">
+                            <div class="detail-journey-4-nav-box">
+                                <div class="detail-journey-4-nav-inner"></div>
+                            </div>
+                        </div>
+                        <!--                    中间空行块-->
+
+
+
+                        <!--                    行程介绍、路线概览块-->
+                        {% for i  in biginfo.datpath %}
+                            <div class="J_JourneyItemd0">
+                                <div class="detail-journey-head">
+                                    <i class="icon detail-journey-day">D{{ i }}</i>
+                                    <strong>第{{ i }}天</strong>
+                                    <strong>当天行程开始————></strong>
+                                    {% for re in hs %}
+                                        {% if i == re.id %}
+                                            <strong style="color: #ff9702; font-weight: bold;">{{ re.jiname }}</strong>
+                                            <strong>————></strong>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <strong>当天行程结束</strong>
+                                </div>
+                                <div class="detail-journey-seprate-solid"></div>
+                                <div class="J_JourneyItemd0-m0">
+                                    <div class="detail-journey-title">
+                                        <i class="icon detail-journey-label-note"></i>
+                                        行程概览
+                                    </div>
+                                    <div class="detail-journey-desc">
+                                        <p><label style="font-size:15px;">1、今天您将游览：</label>
+                                        {% for re in hs %}
+                                            {% if i == re.id %}
+                                                <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.jiname }}&nbsp</label>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <label style="font-size:15px;">这些适合您的景点。</label>
+                                        </p>
+
+                                        <p><label style="font-size:15px;">2、也将享受到本地美食：</label>
+                                            {% for re in fos %}
+                                                {% if i == re.id %}
+                                                    <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.name }}&nbsp</label>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <label style="font-size:15px;">可使用美食APP搜索。</label>
+                                        </p>
+
+                                        <p><label style="font-size:15px;">3、最后你将入住在：</label>
+                                            {% for re in hos %}
+                                                {% if i == re.id %}
+                                                    <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.name }}&nbsp</label>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <label style="font-size:15px;">完成一天的旅游行程。</label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <!--                    行程介绍、路线概览块-->
+
+
+                        <!--                    景点信息展示块-->
+                            <div class="J_JourneyItemd1-m1">
+                                {% for jdinfo in hs %}
+                                    {% if i == jdinfo.id %}
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-spot"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            景点 ：<a class="J_ViewDetail" data-id="d1-m2-s0" href="javascript:;">{{ jdinfo.jiname }}</a>
+                                        </div>
+                                        <div class="J_JourneyItemd1-m1-s0">
+                                            <ul class="detail-journey-list"></ul>
+                                            <div class="detail-journey-desc">
+                                                <li class="single">
+                                                    <i class="icon detail-journey-icon-marker"></i>
+                                                    <b style="color: #000000; font-size:12px;">景点地址：{{ jdinfo.where }}</b>
+                                                </li>
+                                                <div class="jinhongtest">
+                                                    <label style="font-size:12px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp景点简介：{{ jdinfo.intr }}</label>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    景点等级 ： <a class="J_ViewDetail" data-id="d1-m2-s0" href="javascript:;"> <font color="#ff9702">{{ jdinfo.grade }}</font></a>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    推荐理由 ： <a class="J_ViewDetail" data-id="d1-m2-s0" href="javascript:;"> <font color="#ff9702">{{ jdinfo.feature }}</font></a>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    推荐游玩时间 ： <a class="J_ViewDetail" data-id="d1-m2-s0" href="javascript:;"> <font color="#ff9702">{{ jdinfo.time }}</font></a>&nbsp小时
+                                                </div>
+                                            </div>
+                                            <div class="detail-journey-photos">
+                                                <div class="detail-journey-photo detail-journey-photo-3">
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img1 }} data-src="//m.tuniucdn.com/fb2/t1/G5/M00/F7/52/Cii-tFybBzeIHF51AMATFn2zBwYAAUrzAJzskAAwBMu426_w640_h480_c1_t0.jpg" alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img2 }} data-src="//m.tuniucdn.com/fb2/t1/G5/M00/F8/92/Cii-tFwiB6CIMsewAAe946SIp9sAASI_wEWTowAB737638_w640_h480_c1_t0.jpg" alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img3 }} ata-src="//m.tuniucdn.com/fb2/t1/G4/M00/D9/D8/Cii-VVyTBLOAGstfAlOKHdhG93s951_w640_h480_c1_t0.jpg" alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-feature-photo-sep"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-journey-seprate"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        <!--                    景点信息展示块-->
+
+
+                        <!--                    酒店信息展示块-->
+                            <div class="J_JourneyItemd0-m3">
+                                {% for hotleinfo in hos %}
+                                    {% if hotleinfo.id == i %}
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-hotel"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            {{ hotleinfo.name }}
+                                            <span class="detail-journey-star">豪华型</span>
+                                        </div>
+                                        <div class="detail-journey-desc">
+                                            <p name="cont"> 地址：{{ hotleinfo.name }}
+                                                <font color="#ff9702">★★★★★（豪华推荐）</font>
+                                            </p>
+                                        </div>
+                                        <div class="detail-journey-photos">
+                                            <div class="detail-journey-photo detail-journey-photo-3">
+                                                <div class="detail-journey-photo-item">
+                                                    <div class="detail-journey-photo-item-inner">
+                                                        <img src={{ hotleinfo.img }}>
+                                                        <div class="detail-journey-photo-item-title">
+                                                            {{ hotleinfo.name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        <!--                    酒店信息展示块-->
+
+
+                        <!--                    美食信息展示块-->
+                            <div class="J_JourneyItemd0-m2">
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-dinner"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            今日特色美食推荐
+                                            {% for foodinfo in fos %}
+                                                {% if foodinfo.id == i %}
+                                            <div class="detail-journey-desc">
+                                                <label style="color:#ff9702; font-size:12px;">{{ foodinfo.name }}
+                                                </label><br><label style="font-size:12px;">{{ foodinfo.intr }}</label>
+                                            </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="detail-journey-photos">
+                                        <div class="detail-journey-photo detail-journey-photo-3">
+                                            {% for foodinfo in fos %}
+                                                {% if foodinfo.id == i %}
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ foodinfo.img }}>
+                                                            <div class="detail-journey-photo-item-title">
+                                                                {{ foodinfo.name }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                            </div>
+                        <!--                    美食信息展示块-->
+                        {% endfor %}
+
+
+
+                        <div class="detail-journey-head">
+                            <i class="icon detail-journey-day">ED</i>
+                            <strong>旅游推荐结束·祝您旅途愉快！</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--        第一推荐结果块-->
+
+<!--            第二条推荐结果-->
+            <div class="item">
+                <div class="section-box-content detail-route4-brief-box detail-route4-brief-nomap">
+
+                    <!--推荐线路2介绍块-->
+                     <div class="J_DetailRouteBrief detail-route-brief" style="width: 400px;height: 400px">
+                        <div class="J_DetailRouteBriefBox detail-route-brief-box">
+                            <div class="J_DetailRouteBriefInner detail-route-brief-inner">
+                                <h4>推荐线路2：</h4>
+                                <div class="section-box-content">
+                                    <div class="detail-feature-brief">
+                                        <div class="detail-feature-brief-unit">
+                                            <span>出行城市：</span>
+                                            {% if biginfo1.city == "shanghai" %}
+                                                <strong style="font-weight:bold; font-size:15px;">上海</strong>
+                                            {% endif %}
+                                            {% if biginfo1.city == "changsha" %}
+                                                <strong style="font-weight:bold; font-size:15px;">长沙</strong>
+                                            {% endif %}
+                                            {% if biginfo1.city == "chongqing" %}
+                                                <strong style="font-weight:bold; font-size:15px;">重庆</strong>
+                                            {% endif %}
+                                            {% if biginfo1.city == "zigong" %}
+                                                <strong style="font-weight:bold; font-size:15px;">自贡</strong>
+                                            {% endif %}
+                                            {% if biginfo1.city == "panzhihua" %}
+                                                <strong style="font-weight:bold; font-size:15px;">攀枝花</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "chengdu" %}
+                                                <strong style="font-weight:bold; font-size:15px;">成都</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "abazhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">阿坝藏族羌族自治州</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "leshan" %}
+                                                <strong style="font-weight:bold; font-size:15px;">乐山</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "dujiangyan" %}
+                                                <strong style="font-weight:bold; font-size:15px;">都江堰</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "guangzhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">广州</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "shenzhen" %}
+                                                <strong style="font-weight:bold; font-size:15px;">深圳</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "sanya" %}
+                                                <strong style="font-weight:bold; font-size:15px;">三亚</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "guilin" %}
+                                                <strong style="font-weight:bold; font-size:15px;">桂林</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "hangzhou" %}
+                                                <strong style="font-weight:bold; font-size:15px;">杭州</strong>
+                                            {% endif %}
+                                            {% if  biginfo1.city == "beijing" %}
+                                                <strong style="font-weight:bold; font-size:15px;">北京</strong>
+                                            {% endif %}
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">访问景点：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo1.num_jd }} 个
+                                                {% for tx in hs1 %}
+                                                    {% if tx.id|add:1 >= forloop.counter %}
+                                                        ，{{ tx.jiname }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">餐饮推荐：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo1.num_food }} 种特色菜
+                                                {% for tx in fos1 %}
+                                                    {% if tx.id|add:1 >= forloop.counter %}
+                                                        ，{{ tx.name }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span class="indent">住宿推荐：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                共 {{ biginfo1.num_hotle }} 晚酒店
+                                                {% for tx in hos1 %}
+                                                    {% if tx.id == 1 %}
+                                                        ，{{ tx.name }}
+                                                    {% endif %}
+                                                {% endfor %}等。
+                                            </strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>游玩天数：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo1.play_day }}天</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>出行方式：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo1.trfic}}</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>预计费用：</span>
+                                            <strong style="font-weight:bold; font-size:15px;">
+                                                {{ biginfo1.price }}￥</strong>
+                                        </div>
+                                        <div class="detail-feature-brief-unit">
+                                            <span>推荐理由：</span>
+                                            <strong style="color: red; font-weight: bold; font-size:15px;">
+                                                {{ resontence1 }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--推荐线路2介绍块-->
+
+
+                    <!--                    地图展示块-->
+                    <div class="J_DetailRouteBrief detail-route-brief">
+                        <div class="J_DetailRouteBriefBox detail-route-brief-box">
+                            <div class="J_DetailRouteBriefInner detail-route-brief-inner"
+                                 style="width: 1000px;height: 500px">
+                                <style>
+                                        #allmap2 {
+                                                height: 100%;
+                                                width: 100%;
+                                            }
+                                    </style>
+                                    <script src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=qUD85JNavc3cLMb9D8gdCyE3AfgqqgMh"></script>
+                                    <div id="allmap2" ></div>
+                                    <script>
+                                        var los_log_lat = {
+                                            num_jd: {{ biginfo.num_jd }},
+                                            log: {{ los_log_lat.log }},
+                                            lat: {{ los_log_lat.lat }},
+                                            };
+                                        var map = new BMapGL.Map('allmap');
+                                        var point = new BMapGL.Point(116.51397, 39.73517);
+                                        map.centerAndZoom(point, 11);
+                                        map.enableScrollWheelZoom(true);
+                                        var driving = new BMapGL.DrivingRouteLine(map, {
+                                            renderOptions: {
+                                                map: map,
+                                                autoViewport: true,
+                                                enableDragging: true,
+                                            }
+                                        })
+                                        var last = los_log_lat.num_jd - 1;
+                                        var start = new BMapGL.Point(108.320004, 22.82402);
+                                        var end = new BMapGL.Point(los_log_lat.log[last], los_log_lat.lat[last]);
+                                        var way = [];
+                                        for(i=0;i<last;i++){
+                                            waypoint = new BMapGL.Point(los_log_lat.log[i], los_log_lat.lat[i]);
+                                            way.push(waypoint);
+                                            }
+                                            driving.search(start, end, {
+                                             waypoints: way
+                                            });
+
+
+                                        var los1_log_lat = {
+                                            num_jd: {{ biginfo1.num_jd }},
+                                            log: {{ los1_log_lat.log }},
+                                            lat: {{ los1_log_lat.lat }},
+                                            };
+                                        var map1 = new BMapGL.Map('allmap2');
+                                        var point1 = new BMapGL.Point(116.51397, 39.73517);
+                                        map1.centerAndZoom(point1, 11);
+                                        map1.enableScrollWheelZoom(true);
+                                        var driving1 = new BMapGL.DrivingRouteLine(map1, {
+                                            renderOptions: {
+                                                map: map1,
+                                                autoViewport: true,
+                                                enableDragging: true,
+                                            }
+                                        })
+                                        var last1 = los1_log_lat.num_jd - 1;
+                                        var start1 = new BMapGL.Point(108.320004, 22.82402);
+                                        var end1 = new BMapGL.Point(los1_log_lat.log[last1], los1_log_lat.lat[last1]);
+                                        var way1 = [];
+                                        for(i=0;i<last1;i++){
+                                            waypoint1 = new BMapGL.Point(los1_log_lat.log[i], los1_log_lat.lat[i]);
+                                            way1.push(waypoint1);
+                                            }
+                                            driving1.search(start1, end1, {
+                                             waypoints: way1
+                                            });
+                                    </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    地图展示块-->
+
+                    <!--                    线路酒店美食信息块-->
+                    <div class="J_DetailJourney detail-journey detail-journey-4">
+
+
+                        <!--                    中间空行块-->
+                        <div class="detail-journey-dot"></div>
+                        <div class="J_JourneyNav detail-journey-4-nav">
+                            <div class="detail-journey-4-nav-box">
+                                <div class="detail-journey-4-nav-inner"></div>
+                            </div>
+                        </div>
+                        <!--                    中间空行块-->
+
+
+                        <!--                    行程介绍、路线概览块-->
+                        {% for i  in biginfo1.datpath %}
+                            <div class="J_JourneyItemd0">
+                                <div class="detail-journey-head">
+                                    <i class="icon detail-journey-day">D{{ i }}</i>
+                                    <strong>第{{ i }}天</strong>
+                                    <strong>当天行程开始————></strong>
+                                    {% for re in hs1 %}
+                                        {% if i == re.id %}
+                                            <strong style="color: #ff9702; font-weight: bold;">{{ re.jiname }}</strong>
+                                            <strong>————></strong>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <strong>当天行程结束</strong>
+                                </div>
+                                <div class="detail-journey-seprate-solid"></div>
+                                <div class="J_JourneyItemd0-m0">
+                                    <div class="detail-journey-title">
+                                        <i class="icon detail-journey-label-note"></i>
+                                        行程概览
+                                    </div>
+                                    <div class="detail-journey-desc">
+                                        <p><label style="font-size:15px;">1、今天您将游览：</label>
+                                        {% for re in hs1 %}
+                                            {% if i == re.id %}
+                                                <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.jiname }}&nbsp</label>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <label style="font-size:15px;">这些适合您的景点。</label>
+                                        </p>
+
+                                        <p><label style="font-size:15px;">2、也将享受到本地美食：</label>
+                                            {% for re in fos1 %}
+                                                {% if i == re.id %}
+                                                    <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.name }}&nbsp</label>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <label style="font-size:15px;">可使用美食APP搜索。</label>
+                                        </p>
+
+                                        <p><label style="font-size:15px;">3、最后你将入住在：</label>
+                                            {% for re in hos1 %}
+                                                {% if i == re.id %}
+                                                    <label style="color: #ff9702; font-size:15px;">&nbsp{{ re.name }}&nbsp</label>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <label style="font-size:15px;">完成一天的旅游行程。</label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <!--                    行程介绍、路线概览块-->
+
+
+                        <!--                    景点信息展示块-->
+                            <div class="J_JourneyItemd1-m1">
+                                {% for jdinfo in hs1 %}
+                                    {% if i == jdinfo.id %}
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-spot"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            景点 ：<a class="J_ViewDetail" data-id="d1-m2-s0"
+                                                   href="javascript:;">{{ jdinfo.jiname }}</a>
+                                        </div>
+                                        <div class="J_JourneyItemd1-m1-s0">
+                                            <ul class="detail-journey-list"></ul>
+                                            <div class="detail-journey-desc">
+                                                <li class="single">
+                                                    <i class="icon detail-journey-icon-marker"></i>
+                                                    <b style="color: #000000; font-size:12px;">景点地址：{{ jdinfo.where }}</b>
+                                                </li>
+                                                <div class="jinhongtest">
+                                                    <label style="font-size:12px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp景点简介：{{ jdinfo.intr }}</label>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    景点等级 ： <a class="J_ViewDetail" data-id="d1-m2-s0"
+                                                              href="javascript:;"> <font
+                                                        color="#ff9702">{{ jdinfo.grade }}</font></a>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    推荐理由 ： <a class="J_ViewDetail" data-id="d1-m2-s0" href="javascript:;"> <font color="#ff9702">{{ jdinfo.feature }}</font></a>
+                                                </div>
+                                                <div class="detail-journey-title">
+                                                    推荐游玩时间 ： <a class="J_ViewDetail" data-id="d1-m2-s0"
+                                                              href="javascript:;"> <font
+                                                        color="#ff9702">{{ jdinfo.time }}</font></a>&nbsp小时
+                                                </div>
+                                            </div>
+                                            <div class="detail-journey-photos">
+                                                <div class="detail-journey-photo detail-journey-photo-3">
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img1 }} data-src="//m.tuniucdn.com/fb2/t1/G5/M00/F7/52/Cii-tFybBzeIHF51AMATFn2zBwYAAUrzAJzskAAwBMu426_w640_h480_c1_t0.jpg"
+                                                                 alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img2 }} data-src="//m.tuniucdn.com/fb2/t1/G5/M00/F8/92/Cii-tFwiB6CIMsewAAe946SIp9sAASI_wEWTowAB737638_w640_h480_c1_t0.jpg"
+                                                                 alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ jdinfo.img3 }} ata-src="//m.tuniucdn.com/fb2/t1/G4/M00/D9/D8/Cii-VVyTBLOAGstfAlOKHdhG93s951_w640_h480_c1_t0.jpg"
+                                                                 alt="">
+                                                            <div class="detail-journey-photo-item-mask"></div>
+                                                            <div class="detail-journey-photo-item-title">{{ jdinfo.jiname }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="detail-feature-photo-sep"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-journey-seprate"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        <!--                    景点信息展示块-->
+
+                        <!--                    酒店信息展示块-->
+                            <div class="J_JourneyItemd0-m3">
+                                {% for hotleinfo in hos1 %}
+                                    {% if hotleinfo.id == i %}
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-hotel"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            {{ hotleinfo.name }}
+                                            <span class="detail-journey-star">豪华型</span>
+                                        </div>
+                                        <div class="detail-journey-desc">
+                                            <p name="cont"> 地址：{{ hotleinfo.name }}
+                                                <font color="#ff9702">★★★★★（豪华推荐）</font>
+                                            </p>
+                                        </div>
+                                        <div class="detail-journey-photos">
+                                            <div class="detail-journey-photo detail-journey-photo-3">
+                                                <div class="detail-journey-photo-item">
+                                                    <div class="detail-journey-photo-item-inner">
+                                                        <img src={{ hotleinfo.img }}>
+                                                        <div class="detail-journey-photo-item-title">
+                                                            {{ hotleinfo.name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        <!--                    酒店信息展示块-->
+
+
+                        <!--                    美食信息展示块-->
+                            <div class="J_JourneyItemd0-m2">
+                                        <div class="detail-journey-title">
+                                            <i class="icon detail-journey-label-dinner"></i>
+                                            <i class="detail-journey-time">第{{ i }}天</i>
+                                            今日特色美食推荐
+                                            {% for foodinfo in fos1 %}
+                                                {% if foodinfo.id == i %}
+                                            <div class="detail-journey-desc">
+                                                <label style="color:#ff9702; font-size:12px;">{{ foodinfo.name }}
+                                                </label><br><label style="font-size:12px;">{{ foodinfo.intr }}</label>
+                                            </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="detail-journey-photos">
+                                        <div class="detail-journey-photo detail-journey-photo-3">
+                                            {% for foodinfo in fos1 %}
+                                                {% if foodinfo.id == i %}
+                                                    <div class="detail-journey-photo-item">
+                                                        <div class="detail-journey-photo-item-inner">
+                                                            <img src={{ foodinfo.img }}>
+                                                            <div class="detail-journey-photo-item-title">
+                                                                {{ foodinfo.name }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                            </div>
+                        <!--                    美食信息展示块-->
+                        {% endfor %}
+
+
+                        <div class="detail-journey-head">
+                            <i class="icon detail-journey-day">ED</i>
+                            <strong>旅游推荐结束·祝您旅途愉快！</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--            第二条推荐结果-->
+
+
+<script src="http://127.0.0.1:8000/static/js/jquery.2.2.3.min.js"></script>
+<script>
+    $(function () {
+        // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
+        $(".J_Journey4RouteTab li").click(function () {
+            // 链式编程操作（点击加入类，其余的清除类样式）
+            $(this).addClass("active").siblings().removeClass("active");
+            // 2.点击的同时，得到当前li 的索引号
+            var index = $(this).index();
+            console.log(index);
+            // 3.让下部里面相应索引号的item显示，其余的item隐藏
+            $('.contain div.item').eq(index).show().siblings().hide();
+
+        });
+    })
+</script>
+{% endblock %}

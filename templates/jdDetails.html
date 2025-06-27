@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+
+{% block title %}景点详细信息{% endblock %}
+
+{% block content %}
+
+    <!-- Listing Details Heading -->
+    <section id="listing-details" class="p_b70 p_t70">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="details-heading heading">
+                        <h2><a href="#"> <span>{{jdinfo.jiname }}</span></a></h2>
+                        <span>5.0 <img src="http://127.0.0.1:8000/static/images/stars.png" alt="image"></span>
+                        <div class="details-heading-address">
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ jdinfo.jwhere }}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+     <div class="details-heading heading">
+
+                        <h2 class="p_b20">景点 <span>图片</span></h2>
+
+                        <p>图片来自携程</p>
+
+                        <div class="main">
+
+                            <ul id="og-grid" class="og-grid">
+
+                                <li>
+                                    <a href="#" data-largesrc="../static/images/listing-services-1-1.jpg" data-title="Restaurant <span>and Bar</span>" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec cursus orci, id pulvinar arcu.">
+                                        <img src={{ jdinfo.img1 }} alt="img01" />
+                                          <h4>{{jdinfo.jiname }}</h4>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#" data-largesrc="images/listing-services-2-2.jpg" data-title="Room <span>Booking</span>" data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec cursus orci, id pulvinar arcu.">
+                                        <img src={{ jdinfo.img2 }} alt="img01" />
+
+                                        <h4>{{jdinfo.jiname }}</h4>
+
+                                    </a>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+            <div class="row m_t40">
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+
+                    <div class="details-heading heading">
+
+                        <h2 class="p_b40">景点 <span>  介绍</span></h2>
+
+                        <p>{{ jdinfo.intr }}</p>
+                    </div>
+
+
+
+
+
+                    <div class="details-heading heading">
+
+                        <h2 class="p_b20">景点  <span>评论</span></h2>
+
+                        <div class="details-heading-review m_t30">
+
+                             {% for item in cominfo %}
+                                    <div class="media">
+
+                                <div  class="media-left">
+                                    <img  style="height: 50px; width: 50px" src={{ item.img }}  alt="image">
+                                </div>
+
+                                <div class="media-body">
+                                    <div class="review-detail">
+                                        <h3>{{item.username}} <span>4.5 <img src="http://127.0.0.1:8000/static/images/stars-2.png" alt="image"></span></h3>
+                                        <span>{{ item.datetime }}</span>
+                                        <p> {{ item.commentinfo }}</p>
+                                        <ul class="listing-amenities">
+                                            <li><a href="#!"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span>Like</span></a> </li>
+                                            <li><a href="#!"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <span>Dis-Like</span></a> </li>
+                                            <li><a href="#!"><i class="fa fa-flag-o" aria-hidden="true"></i> <span>Report</span> </a> </li>
+                                            <li><a href="#!"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span>Comments</span> </a> </li>
+                                            <li><a href="#!"><span><b>Share Now:</b></span>  </a> </li>
+                                            <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
+                                            <li><a href="#!"><i class="fa fa-google-plus" aria-hidden="true"></i></a> </li>
+                                            <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+                                            <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
+                                            <li><a href="#!"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                                {% endfor %}
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+
+                    <div class="right-bar bg_white">
+                        <h4>Get <span>Directions</span></h4>
+                        <div id="cd-google-map">
+                            <div id="google-container"></div>
+                            <div id="cd-zoom-in"></div>
+                            <div id="cd-zoom-out"></div>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 57 East 57th Street, New York 10022</p>
+                            <p><i class="fa fa-phone" aria-hidden="true"></i> +123 456 7890</p>
+                            <p><i class="fa fa-globe" aria-hidden="true"></i> <a href="#">www.finddo.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="right-bar bg_white">
+                        <h4>发表 <span>评论</span></h4>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control" name="messgae" placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">发表</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="right-bar bg_white">
+                        <h4>Other <span>Informations</span></h4>
+                        <ul class="right-bar-listing">
+                            <li><a href="#">Today Shop <span class="bg_blue color_white">(open)</span></a>
+                            </li>
+                            <li><a href="#">Experience  <span>(12)</span></a>
+                            </li>
+                            <li><a href="#">Parking  <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Smoking  <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Pool Table <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Take Out <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Good for Groups  <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Accepts All Cards  <span>(Yes)</span></a>
+                            </li>
+                            <li><a href="#">Open Time <span>(09:00 am)</span></a>
+                            </li>
+                            <li><a href="#">Close Time <span>(10:00 pm)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="right-bar bg_white">
+                        <h4>Recent add <span>Listing</span></h4>
+                        <div id="recent-listing" class="owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-1.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Jobs</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-2.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Real Estate</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-1.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Jobs</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-2.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Real Estate</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-1.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Jobs</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                                <div class="recent-listing-img">
+                                    <img src="images/recent-2.jpg" alt="image">
+                                    <div class="recent-listing-links">
+                                        <a href="#" class="recent-jobs">Real Estate</a>
+                                        <a href="#" class="recent-readmore">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Listing Details Heading -->
+
+    <!-- Footer -->
+    <footer id="footer_1" class="bg_blue p_t70 p_b30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="footer_logo">
+                        <img src="images/logo-footer.png" alt="image" />
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 text-center">
+                    <ul class="footer_link">
+                        <li><a href="index.html">Home</a>
+                        </li>
+                        <li><a href="listing.html">Browse Category</a>
+                        </li>
+                        <li><a href="listing-3.html">Listinge</a>
+                        </li>
+                        <li><a href="bloghtml.html">Our Blog</a>
+                        </li>
+                        <li><a href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="header-top-links">
+                        <div class="social-icons text-right">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i aria-hidden="true" class="fa fa-dribbble"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_line"></div>
+        </div>
+        <div class="footer_botom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-6 col-sm-12">
+                        <p>Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+                    </div>
+                    <div class="col-md-6 col-md-6 col-sm-12 text-right">
+                        <p>Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://themeforest.net/user/99_design">99_Design</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Popups -->
+    <section id="best-thing-model">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">United State</h4>
+                        <ul class="best-things-listing">
+                            <li><a href="#">15 Cities,</a>
+                            </li>
+                            <li><a href="#">130 listings,</a>
+                            </li>
+                            <li><a href="#">View 6753</a>
+                            </li>
+                        </ul>
+                        <img src="images/stars-2.png" alt="image">
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="best-thing-slider" class="owl-carousel owl-theme">
+                            <div class="item">
+                                <img src="images/best-thing-slider-1.jpg" alt="image">
+                            </div>
+                            <div class="item">
+                                <img src="images/best-thing-slider-1.jpg" alt="image">
+                            </div>
+                            <div class="item">
+                                <img src="images/best-thing-slider-1.jpg" alt="image">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="best-thing-model-description">
+                                    <h4>Description</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a pretium ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae tellus in nisl aliquam cursus. Etiam condimentum purus urna, quis fermentum felis finibus quis. Integer magna quam, accumsan ac purus at, ultricies sagittis metus. Nulla tincidunt commodo egestas Morbi in molestie dui, Aenean feugiat odio eu venenatis sollicitudin...! </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="best-thing-model-feature">
+                                    <h4>Features</h4>
+                                    <ul>
+                                        <li>Resturent (152,546)</li>
+                                        <li>Real Estate (35,366)</li>
+                                        <li>Sport (2,546)</li>
+                                        <li>Beauty & Spa (1,546)</li>
+                                        <li>Vehicles (2, 34, 546)</li>
+                                        <li>Shoping (2,546)</li>
+                                        <li>Industry (3,506)</li>
+                                        <li>Dating (12,546)</li>
+                                        <li>Jobs (22,546)</li>
+                                        <li>Other Services (24,567)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="best-thing-model-description">
+                            <h4>Last Review</h4>
+                            <img src="images/stars-2.png" alt="image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a pretium ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae tellus in nisl aliquam cursus. Etiam condimentum purus urna, quis fermentum felis finibus quis. Integer magna quam, accumsan ac purus at, ultricies sagittis metus. Nulla tincidunt commodo egestas Morbi in molestie dui, Aenean feugiat odio eu venenatis sollicitudin...! </p>
+
+                            <div class="best-thing-model-btn">
+                                <a href="listing-details.html">More Details</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popups -->
+
+   <script src="http://127.0.0.1:8000/static/js/jquery.2.2.3.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/bootstrap.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/jquery.appear.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/jquery-countTo.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/owl.carousel.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/jquery.fancybox.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/bootsnav.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/zelect.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/parallax.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/modernizr.custom.26633.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/jquery.gridrotator.js"></script>
+    <script src="http://127.0.0.1:8000/static/js/functions.js"></script>
+    <script>
+        $(function() {
+            Grid.init();
+        });
+    </script>
+{% endblock %}
