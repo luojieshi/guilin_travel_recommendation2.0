@@ -2,9 +2,10 @@
 # guilin_travel_recommendation2.0
 Guangxi tourism recommendation software
 =======
-# 大规模多模态桂林旅游行为数据分析关键算法研究与工具开发
+# 基于位置服务的广西旅游线路推荐软件
 
-该项目是【Github】上的一个开源推荐系统（Recommendation System）实战项目，项目包含了旅游用户需求分析，旅游线路推荐等多个功能。
+## 简介
+本项目设计了一个为用户提出包价旅游策略服务的网站，利用游客的位置，咨询游客的需求（出行地域、预算经费、景点偏好），采集游客的浏览行为，给游客推荐旅游路线、景点信息、餐饮与住宿信息和推荐旅游所组成的旅行包。使用Django搭建网站框架，Python+HTML+CSS+JavaScripts作为编程语言，调用ClickHouse数据库获取用户信息进行分析，调用百度地图API可视化旅游路径提高用户体验。该项目曾使用一键游广西公司提供的旅游数据与LLM打造AI智慧行程定制系统，旨在为用户提供个性化、智能化的旅行体验，实现从行程规划到个性化推荐的全方位服务。
 
 ## 功能接口
 
@@ -15,11 +16,6 @@ Guangxi tourism recommendation software
 - `DeepFace.represent`:人脸特征提取
 - `DeepFace.stream`:人脸实时分析
 
-当然这个项目的功能很多，很抱歉我不能全都提到，下面会对这几个接口进行一一讲解，在此之前你需要准备一些基础数据 => 人物照片，视频等【我的放文章最后】
-
-当然还需这几个python库作为辅助，如果你还未安装可使用下面命令进行安装
-
-**matplotlib**：数据可视化库，用于创建静态、动态、交互式的图形和可视化。
 
 ```bash
 pip install matplotlib

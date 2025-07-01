@@ -1,6 +1,6 @@
 # 管理主程序
 # !/usr/bin/env python
-# guilin_travel_recommendation2：与项目同名，创建的python包
+# guilin_travel_recommendation2：与项目同名，自创建的python包
 # aTravel：这个目录包含了应用的全部内容
 import os
 import sys
