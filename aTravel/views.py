@@ -98,7 +98,7 @@ def reg(request):
         name = request.POST.get('name')
         pwd = request.POST.get('pwd')
     # print(name, pwd)
-    # 渲染dataTest页面
+    # 载入模板，填充上下文，再返回由它生成的 HttpResponse 对象
     return render(request, 'dataTest.html')
 
 
