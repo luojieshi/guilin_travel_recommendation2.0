@@ -57,6 +57,7 @@ class biginfo:
     bool_food = 1
     his = []
     reason = []
+    begin_log_lat = []
 
 
 class biginfo1:
@@ -74,6 +75,7 @@ class biginfo1:
     bool_food = 1
     his = []
     reason = []
+    begin_log_lat = []
 
 
 class search:
@@ -131,6 +133,75 @@ def index(request):
         play_day = int(request.POST['post_fields'])
         quanju.play_day = play_day
         recommend_food = request.POST["post_fields[ycyq1]"]
+        area_begin = request.POST["area_begin"]
+        begin_log_lat = []
+        # 初始地点选择后，定位出发地点为该省份的首都
+        if area_begin == "北京":
+            begin_log_lat = [116.405285, 39.904989]
+        elif area_begin == "上海":
+            begin_log_lat = [121.4692688, 31.2381763]
+        elif area_begin == "天津":
+            begin_log_lat = [117.1951073, 39.0856735]
+        elif area_begin == "重庆":
+            begin_log_lat = [106.5516, 29.5630]
+        elif area_begin == "河北":
+            begin_log_lat = [114.5149, 38.0428]
+        elif area_begin == "山西":
+            begin_log_lat = [112.5489, 37.8706]
+        elif area_begin == "辽宁":
+            begin_log_lat = [123.4315, 41.8057]
+        elif area_begin == "吉林":
+            begin_log_lat = [125.3235, 43.8171]
+        elif area_begin == "黑龙江":
+            begin_log_lat = [126.5350, 45.8038]
+        elif area_begin == "江苏":
+            begin_log_lat = [118.7969, 32.0603]
+        elif area_begin == "浙江":
+            begin_log_lat = [120.1551, 30.2741]
+        elif area_begin == "安徽":
+            begin_log_lat = [117.2272, 31.8206]
+        elif area_begin == "福建":
+            begin_log_lat = [119.2965, 26.0745]
+        elif area_begin == "江西":
+            begin_log_lat = [115.8579, 28.6820]
+        elif area_begin == "山东":
+            begin_log_lat = [117.1201, 36.6512]
+        elif area_begin == "河南":
+            begin_log_lat = [113.6253, 34.7466]
+        elif area_begin == "湖北":
+            begin_log_lat = [114.3055, 30.5928]
+        elif area_begin == "长沙":
+            begin_log_lat = [112.9388, 28.2282]
+        elif area_begin == "广东":
+            begin_log_lat = [113.2644, 23.1291]
+        elif area_begin == "海南":
+            begin_log_lat = [110.3483, 20.0191]
+        elif area_begin == "四川":
+            begin_log_lat = [104.0668, 30.5728]
+        elif area_begin == "贵州":
+            begin_log_lat = [106.6302, 26.6470]
+        elif area_begin == "云南":
+            begin_log_lat = [102.7097, 25.0433]
+        elif area_begin == "陕西":
+            begin_log_lat = [108.9398, 34.3416]
+        elif area_begin == "甘肃":
+            begin_log_lat = [103.8343, 36.0611]
+        elif area_begin == "青海":
+            begin_log_lat = [101.7788, 36.6232]
+        elif area_begin == "内蒙古":
+            begin_log_lat = [111.7490, 40.8424]
+        elif area_begin == "广西":
+            begin_log_lat = [108.3663, 22.8172]
+        elif area_begin == "西藏":
+            begin_log_lat = [91.1175, 29.6535]
+        elif area_begin == "宁夏":
+            begin_log_lat = [106.2309, 38.4872]
+        elif area_begin == "新疆":
+            begin_log_lat = [87.6168, 43.8256]
+        elif area_begin == "香港":
+            begin_log_lat = [114.1694, 22.3193]
+        elif area_begin == "澳门":
+            begin_log_lat = [113.5439, 22.1987]
 
         if recommend_food == '推荐特色菜':
             biginfo.bool_food = 1
@@ -236,6 +307,8 @@ def index(request):
         biginfo.hotlepath = user_info.hotel_array
         # 出行方式
         biginfo.trfic = user_info.traffic
+        # 起始地点坐标
+        biginfo.begin_log_lat = begin_log_lat
 
         shuinfo1 = UserInfo1(city, people, daytime_unicode, pay, traffic, jd_type1, int(play_mode))
         shuinfo1.find_id()
@@ -264,6 +337,7 @@ def index(request):
         biginfo1.foodpath = shuinfo1.food_array
         biginfo1.hotlepath = shuinfo1.hotel_array
         biginfo1.trfic = user_info.traffic
+        biginfo1.begin_log_lat = begin_log_lat
         print(biginfo.foodpath, biginfo.hotlepath)
         print(biginfo1.foodpath, biginfo1.hotlepath)
         # 转到result2页面处理最终推荐结果

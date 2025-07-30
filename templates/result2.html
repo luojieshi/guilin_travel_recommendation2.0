@@ -500,6 +500,8 @@
                                     <script src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=qUD85JNavc3cLMb9D8gdCyE3AfgqqgMh"></script>
                                     <div id="allmap2" ></div>
                                     <script>
+                                        var begin_log_lat = {{ biginfo.begin_log_lat }};
+                                        var begin_log_lat1 = {{ biginfo1.begin_log_lat }};
                                         var los_log_lat = {
                                             num_jd: {{ biginfo.num_jd }},
                                             log: {{ los_log_lat.log }},
@@ -517,7 +519,7 @@
                                             }
                                         })
                                         var last = los_log_lat.num_jd - 1;
-                                        var start = new BMapGL.Point(108.320004, 22.82402);
+                                        var start = new BMapGL.Point(begin_log_lat[0], begin_log_lat[1]);
                                         var end = new BMapGL.Point(los_log_lat.log[last], los_log_lat.lat[last]);
                                         var way = [];
                                         for(i=0;i<last;i++){
@@ -546,7 +548,7 @@
                                             }
                                         })
                                         var last1 = los1_log_lat.num_jd - 1;
-                                        var start1 = new BMapGL.Point(108.320004, 22.82402);
+                                        var start1 = new BMapGL.Point(begin_log_lat1[0], begin_log_lat1[1]);
                                         var end1 = new BMapGL.Point(los1_log_lat.log[last1], los1_log_lat.lat[last1]);
                                         var way1 = [];
                                         for(i=0;i<last1;i++){
