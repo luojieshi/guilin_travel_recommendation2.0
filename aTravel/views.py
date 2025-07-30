@@ -519,7 +519,7 @@ def result(request):
 
 
 def addindex_number(request):
-    number = random.randint(0,100)
+    number = random.randint(0, 100)
     value = {'title': number}
     return render(request, 'addindex_number.html', context=value)
 
